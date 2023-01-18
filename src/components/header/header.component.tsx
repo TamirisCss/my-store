@@ -1,20 +1,28 @@
 import { HiOutlineShoppingBag } from "react-icons/hi";
 
+//Styles
+import {
+  HeaderContainer,
+  HeaderItems,
+  HeaderItem,
+  HeaderTitle,
+} from "./header.styles";
+
 const Header = () => {
   return (
-    <div className="header-container">
-      <h2 className="header-title">MyStore</h2>
+    <HeaderContainer>
+      <HeaderTitle>CLUB CLOTHING</HeaderTitle>
 
-      <div className="header-items">
-        <div className="header-item">Explorar</div>
-        <div className="header-item">Login</div>
-        <div className="header-item">Criar Conta</div>
-        <div className="header-item">
+      <HeaderItems>
+        <HeaderItem>Explorar</HeaderItem>
+        <HeaderItem>Login</HeaderItem>
+        <HeaderItem>Criar Conta</HeaderItem>
+        <HeaderItem>
           <HiOutlineShoppingBag size={25} />
-          <p>5</p>
-        </div>
-      </div>
-    </div>
+          <p style={{ marginLeft: 5 }}>5</p>
+        </HeaderItem>
+      </HeaderItems>
+    </HeaderContainer>
   );
 };
 

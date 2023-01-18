@@ -3,15 +3,20 @@ import { FunctionComponent } from "react";
 //Utils
 import Category from "../../types/category.types";
 
+// Styles
+import { CategoryItemContainer, CategoryName } from "./category-item.styles";
+
 interface CategoryItemProps {
   category: Category;
 }
 const CategoryItem: FunctionComponent<CategoryItemProps> = ({ category }) => {
   return (
-    <>
-      <div>{category.displayName}</div>
-      <p>Explorar</p>
-    </>
+    <CategoryItemContainer backgroundImage={category.imageUrl}>
+      <CategoryName>
+        <p>{category.displayName}</p>
+        <p>Explorar</p>
+      </CategoryName>
+    </CategoryItemContainer>
   );
 };
 
