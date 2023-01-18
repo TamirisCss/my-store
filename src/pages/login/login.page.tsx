@@ -1,5 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineLogin } from "react-icons/ai";
+import { useForm } from "react-hook-form";
+import validator from "validator";
 
 // Components
 import Header from "../../components/header/header.component";
@@ -14,8 +16,19 @@ import {
   LoginInputContainer,
   LoginSubtitle,
 } from "./login.styles";
+import InputErrorMessage from "../../components/input-error-message/input-error-message.component";
 
 const LoginPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleSubmitPress = (data: any) => {
+    console.log({ data });
+  };
+
   return (
     <>
       <Header />
@@ -32,15 +45,46 @@ const LoginPage = () => {
 
           <LoginInputContainer>
             <p>E-mail</p>
-            <CustomInput placeholder="Digite seu e-mail" />
+            <CustomInput
+              hasError={!!errors?.email}
+              placeholder="Digite seu e-mail"
+              {...register("email", {
+                required: true,
+                validate: (value) => {
+                  return validator.isEmail(value);
+                },
+              })}
+            />
+
+            {errors?.email?.type === "required" && (
+              <InputErrorMessage>O e-mail é obrigatório.</InputErrorMessage>
+            )}
+
+            {errors?.email?.type === "validate" && (
+              <InputErrorMessage>
+                Por favor, insira um e-mail válido.
+              </InputErrorMessage>
+            )}
           </LoginInputContainer>
 
           <LoginInputContainer>
             <p>Senha</p>
-            <CustomInput placeholder="Digite sua senha" />
+            <CustomInput
+              hasError={!!errors?.password}
+              placeholder="Digite sua senha"
+              type="password"
+              {...register("password", { required: true })}
+            />
+
+            {errors?.password?.type === "required" && (
+              <InputErrorMessage>A senha é obrigatória.</InputErrorMessage>
+            )}
           </LoginInputContainer>
 
-          <CustomButton startIcon={<AiOutlineLogin size={18} />}>
+          <CustomButton
+            startIcon={<AiOutlineLogin size={18} />}
+            onClick={() => handleSubmit(handleSubmitPress)()}
+          >
             Entrar
           </CustomButton>
         </LoginContent>
