@@ -12,6 +12,11 @@ export const HeaderContainer = styled.div`
 `;
 
 export const HeaderTitle = styled.h2`
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  font-family: "Handlee", cursive;
   font-weight: bold;
   font-size: 1.5rem;
 `;
