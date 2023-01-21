@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase.config";
+import { categoryConverter } from "../../converters/firestore.converters";
 
 //Components
 import CategoryItem from "../category-item/category-item.component";
@@ -18,8 +19,10 @@ const Categories = () => {
     try {
       const categoriesFromFirestore: Category[] = [];
 
-      const querySnapshot = await getDocs(collection(db, "categories"));
-      querySnapshot.forEach((doc: any) => {
+      const querySnapshot = await getDocs(
+        collection(db, "categories").withConverter(categoryConverter)
+      );
+      querySnapshot.forEach((doc) => {
         categoriesFromFirestore.push(doc.data());
       });
 
