@@ -2,6 +2,12 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineLogin } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import validator from "validator";
+import { auth } from "../../config/firebase.config";
+import {
+  AuthError,
+  AuthErrorCodes,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 // Components
 import Header from "../../components/header/header.component";
@@ -27,11 +33,30 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<LoginForm>();
 
-  const handleSubmitPress = (data: any) => {
-    console.log({ data });
+  const handleSubmitPress = async (data: LoginForm) => {
+    try {
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+
+      console.log({ userCredentials });
+    } catch (error) {
+      const _error = error as AuthError;
+
+      if (_error.code === AuthErrorCodes.INVALID_PASSWORD) {
+        return setError("password", { type: "mismatch" });
+      }
+
+      if (_error.code === AuthErrorCodes.USER_DELETED) {
+        return setError("email", { type: "notFound" });
+      }
+    }
   };
 
   return (
@@ -65,6 +90,12 @@ const LoginPage = () => {
               <InputErrorMessage>O e-mail é obrigatório.</InputErrorMessage>
             )}
 
+            {errors?.email?.type === "notFound" && (
+              <InputErrorMessage>
+                O e-mail não foi encontrado.
+              </InputErrorMessage>
+            )}
+
             {errors?.email?.type === "validate" && (
               <InputErrorMessage>
                 Por favor, insira um e-mail válido.
@@ -85,6 +116,10 @@ const LoginPage = () => {
               <InputErrorMessage>A senha é obrigatória.</InputErrorMessage>
             )}
           </LoginInputContainer>
+
+          {errors?.password?.type === "mismatch" && (
+            <InputErrorMessage>A senha é inválida.</InputErrorMessage>
+          )}
 
           <CustomButton
             startIcon={<AiOutlineLogin size={18} />}
