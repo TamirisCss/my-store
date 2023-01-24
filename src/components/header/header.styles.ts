@@ -19,6 +19,7 @@ export const HeaderTitle = styled.h2`
   font-family: "Handlee", cursive;
   font-weight: bold;
   font-size: 1.5rem;
+  cursor: pointer;
 `;
 
 export const HeaderItems = styled.div`
