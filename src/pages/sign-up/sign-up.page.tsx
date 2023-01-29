@@ -55,6 +55,7 @@ const SignUpPage = () => {
     if (isAuthenticated) {
       navigate("/");
     }
+    // eslint-disable-next-line
   }, [isAuthenticated]);
 
   const handleSubmitPress = async (data: SignUpForm) => {

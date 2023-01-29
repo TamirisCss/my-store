@@ -52,6 +52,7 @@ const LoginPage = () => {
     if (isAuthenticated) {
       navigate("/");
     }
+    // eslint-disable-next-line
   }, [isAuthenticated]);
 
   const handleSubmitPress = async (data: LoginForm) => {
