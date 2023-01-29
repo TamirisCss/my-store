@@ -2,7 +2,8 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineLogin } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import validator from "validator";
-import { auth, db, googleProvider } from "../../config/firebase.config";
+import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import {
   AuthError,
@@ -10,6 +11,10 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
+
+//Utils
+import { auth, db, googleProvider } from "../../config/firebase.config";
+import { UserContext } from "../../contexts/user.context";
 
 // Components
 import Header from "../../components/header/header.component";
@@ -38,6 +43,16 @@ const LoginPage = () => {
     setError,
     formState: { errors },
   } = useForm<LoginForm>();
+
+  const { isAuthenticated } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated]);
 
   const handleSubmitPress = async (data: LoginForm) => {
     try {

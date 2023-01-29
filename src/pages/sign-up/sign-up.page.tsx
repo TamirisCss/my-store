@@ -1,4 +1,6 @@
 import { AiOutlineLogin } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import validator from "validator";
 import { addDoc, collection } from "firebase/firestore";
@@ -24,6 +26,7 @@ import {
 
 //Utils
 import { auth, db } from "../../config/firebase.config";
+import { UserContext } from "../../contexts/user.context";
 
 interface SignUpForm {
   firstName: string;
@@ -43,6 +46,16 @@ const SignUpPage = () => {
   } = useForm<SignUpForm>();
 
   const watchPassword = watch("password");
+
+  const { isAuthenticated } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated]);
 
   const handleSubmitPress = async (data: SignUpForm) => {
     try {
