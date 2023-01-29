@@ -2,9 +2,12 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineLogin } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import validator from "validator";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+
+import Loading from "../../components/loading/loading.component";
+
 import {
   AuthError,
   AuthErrorCodes,
@@ -44,6 +47,8 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<LoginForm>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const { isAuthenticated } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -57,6 +62,8 @@ const LoginPage = () => {
 
   const handleSubmitPress = async (data: LoginForm) => {
     try {
+      setIsLoading(true);
+
       const userCredentials = await signInWithEmailAndPassword(
         auth,
         data.email,
@@ -74,11 +81,15 @@ const LoginPage = () => {
       if (_error.code === AuthErrorCodes.USER_DELETED) {
         return setError("email", { type: "notFound" });
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSignInWithGooglePress = async () => {
     try {
+      setIsLoading(true);
+
       const userCredentials = await signInWithPopup(auth, googleProvider);
 
       const querySnapshot = await getDocs(
@@ -104,13 +115,15 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
       <Header />
-
+      {isLoading && <Loading />}
       <LoginContainer>
         <LoginContent>
           <LoginHeadline>Entre com a sua conta</LoginHeadline>

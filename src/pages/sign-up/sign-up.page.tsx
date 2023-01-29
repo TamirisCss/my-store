@@ -1,9 +1,12 @@
 import { AiOutlineLogin } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import validator from "validator";
 import { addDoc, collection } from "firebase/firestore";
+
+import Loading from "../../components/loading/loading.component";
+
 import {
   AuthError,
   createUserWithEmailAndPassword,
@@ -45,6 +48,8 @@ const SignUpPage = () => {
     formState: { errors },
   } = useForm<SignUpForm>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const watchPassword = watch("password");
 
   const { isAuthenticated } = useContext(UserContext);
@@ -60,6 +65,8 @@ const SignUpPage = () => {
 
   const handleSubmitPress = async (data: SignUpForm) => {
     try {
+      setIsLoading(true);
+
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
         data.email,
@@ -81,13 +88,15 @@ const SignUpPage = () => {
       if (_error.code === AuthErrorCodes.EMAIL_EXISTS) {
         return setError("email", { type: "alreadyInUse" });
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
       <Header />
-
+      {isLoading && <Loading />}
       <SignUpContainer>
         <SignUpContent>
           <SignUpHeadline>Crie sua conta</SignUpHeadline>
