@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
+import Loading from "./components/loading/loading.component";
+
 //Pages
 import HomePage from "./pages/home/home.page";
 import LoginPage from "./pages/login/login.page";
@@ -45,7 +47,7 @@ const App: FunctionComponent = () => {
     return setIsInitializing(false);
   });
 
-  if (isInitializing) return null;
+  if (isInitializing) return <Loading />;
 
   return (
     <BrowserRouter>
