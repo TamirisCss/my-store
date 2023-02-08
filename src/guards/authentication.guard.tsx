@@ -23,6 +23,7 @@ const AuthenticationGuard: FunctionComponent<children> = ({ children }) => {
         navigate("/login");
       }, 3000);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
   if (!isAuthenticated) {
