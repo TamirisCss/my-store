@@ -39,20 +39,20 @@ const Header = () => {
   return (
     <HeaderContainer>
       <HeaderTitle onClick={handleHomeClick}>
-        Minha Lojinha <GiAmpleDress size={25} color={"white"} />
+        My Store <GiAmpleDress size={25} color={"white"} />
       </HeaderTitle>
 
       <HeaderItems>
-        <HeaderItem onClick={handleExploreClick}>Explorar</HeaderItem>
+        <HeaderItem onClick={handleExploreClick}>Explore</HeaderItem>
         {!isAuthenticated && (
           <>
             <HeaderItem onClick={handleLoginClick}>Login</HeaderItem>
-            <HeaderItem onClick={handleSignUpClick}>Criar Conta</HeaderItem>
+            <HeaderItem onClick={handleSignUpClick}>Sing up</HeaderItem>
           </>
         )}
 
         {isAuthenticated && (
-          <HeaderItem onClick={() => signOut(auth)}>Sair</HeaderItem>
+          <HeaderItem onClick={() => signOut(auth)}>Logout</HeaderItem>
         )}
         <HeaderItem onClick={toggleCart}>
           <HiOutlineShoppingBag size={25} />

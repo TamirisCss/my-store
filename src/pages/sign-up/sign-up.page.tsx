@@ -99,31 +99,31 @@ const SignUpPage = () => {
       {isLoading && <Loading />}
       <SignUpContainer>
         <SignUpContent>
-          <SignUpHeadline>Crie sua conta</SignUpHeadline>
+          <SignUpHeadline>Create your account</SignUpHeadline>
 
           <SignUpInputContainer>
-            <p>Nome</p>
+            <p>Name</p>
             <CustomInput
               hasError={!!errors?.firstName}
-              placeholder="Digite seu nome"
+              placeholder="Type your name"
               {...register("firstName", { required: true })}
             />
 
             {errors?.firstName?.type === "required" && (
-              <InputErrorMessage>O nome é obrigatório.</InputErrorMessage>
+              <InputErrorMessage>Name is required.</InputErrorMessage>
             )}
           </SignUpInputContainer>
 
           <SignUpInputContainer>
-            <p>Sobrenome</p>
+            <p>Last name</p>
             <CustomInput
               hasError={!!errors?.lastName}
-              placeholder="Digite seu sobrenome"
+              placeholder="Type your lastname"
               {...register("lastName", { required: true })}
             />
 
             {errors?.lastName?.type === "required" && (
-              <InputErrorMessage>O sobrenome é obrigatório.</InputErrorMessage>
+              <InputErrorMessage>Last name is required.</InputErrorMessage>
             )}
           </SignUpInputContainer>
 
@@ -131,7 +131,7 @@ const SignUpPage = () => {
             <p>E-mail</p>
             <CustomInput
               hasError={!!errors?.email}
-              placeholder="Digite seu e-mail"
+              placeholder="Type your e-mail"
               {...register("email", {
                 required: true,
                 validate: (value) => {
@@ -141,47 +141,46 @@ const SignUpPage = () => {
             />
 
             {errors?.email?.type === "required" && (
-              <InputErrorMessage>O e-mail é obrigatório.</InputErrorMessage>
+              <InputErrorMessage>E-mail is required.</InputErrorMessage>
             )}
 
             {errors?.email?.type === "alreadyInUse" && (
               <InputErrorMessage>
-                Este e-mail já está sendo utilizado.
+                This e-mail is alredy in use.
               </InputErrorMessage>
             )}
 
             {errors?.email?.type === "validate" && (
-              <InputErrorMessage>
-                Por favor, insira um e-mail válido.
-              </InputErrorMessage>
+              <InputErrorMessage>Add a valid e-mail.</InputErrorMessage>
             )}
           </SignUpInputContainer>
 
           <SignUpInputContainer>
-            <p>Senha</p>
+            <p>Password</p>
             <CustomInput
               hasError={!!errors?.password}
-              placeholder="Digite sua senha"
+              placeholder="Type your password"
               type="password"
               {...register("password", { required: true, minLength: 6 })}
             />
 
             {errors?.password?.type === "required" && (
-              <InputErrorMessage>A senha é obrigatória.</InputErrorMessage>
+              <InputErrorMessage>The password is required.</InputErrorMessage>
             )}
 
             {errors?.password?.type === "minLength" && (
               <InputErrorMessage>
-                A senha precisa ter no mínimo 6 caracteres.
+                A senha precisa ter no mínimo 6 caracteres. Password need
+                minimum 6 characters
               </InputErrorMessage>
             )}
           </SignUpInputContainer>
 
           <SignUpInputContainer>
-            <p>Confirmação de Senha</p>
+            <p>Confirm your password</p>
             <CustomInput
               hasError={!!errors?.passwordConfirmation}
-              placeholder="Digite novamente sua senha"
+              placeholder="Confirm password"
               type="password"
               {...register("passwordConfirmation", {
                 required: true,
@@ -194,20 +193,18 @@ const SignUpPage = () => {
 
             {errors?.passwordConfirmation?.type === "required" && (
               <InputErrorMessage>
-                A confirmação de senha é obrigatória.
+                Password confirmation is required
               </InputErrorMessage>
             )}
 
             {errors?.passwordConfirmation?.type === "minLength" && (
               <InputErrorMessage>
-                A confirmação de senha precisa ter no mínimo 6 caracteres.
+                Password confirmation needs minimum 6 characters.
               </InputErrorMessage>
             )}
 
             {errors?.passwordConfirmation?.type === "validate" && (
-              <InputErrorMessage>
-                A confirmação de senha precisa ser igual a senha.
-              </InputErrorMessage>
+              <InputErrorMessage>Password is not the same</InputErrorMessage>
             )}
           </SignUpInputContainer>
 
@@ -215,7 +212,7 @@ const SignUpPage = () => {
             onClick={() => handleSubmit(handleSubmitPress)()}
             startIcon={<AiOutlineLogin size={18} />}
           >
-            Criar Conta
+            Create account
           </CustomButton>
         </SignUpContent>
       </SignUpContainer>

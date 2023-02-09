@@ -126,22 +126,22 @@ const LoginPage = () => {
       {isLoading && <Loading />}
       <LoginContainer>
         <LoginContent>
-          <LoginHeadline>Entre com a sua conta</LoginHeadline>
+          <LoginHeadline>Login with your account</LoginHeadline>
 
           <CustomButton
             startIcon={<FcGoogle size={18} />}
             onClick={handleSignInWithGooglePress}
           >
-            Entrar com o Google
+            Login with Google
           </CustomButton>
 
-          <LoginSubtitle>ou entre com o seu e-mail</LoginSubtitle>
+          <LoginSubtitle>Or Login with your e-mail</LoginSubtitle>
 
           <LoginInputContainer>
             <p>E-mail</p>
             <CustomInput
               hasError={!!errors?.email}
-              placeholder="Digite seu e-mail"
+              placeholder="Type your e-mail"
               {...register("email", {
                 required: true,
                 validate: (value) => {
@@ -151,45 +151,41 @@ const LoginPage = () => {
             />
 
             {errors?.email?.type === "required" && (
-              <InputErrorMessage>O e-mail é obrigatório.</InputErrorMessage>
+              <InputErrorMessage>E-mail is required.</InputErrorMessage>
             )}
 
             {errors?.email?.type === "notFound" && (
-              <InputErrorMessage>
-                O e-mail não foi encontrado.
-              </InputErrorMessage>
+              <InputErrorMessage>E-mail not found.</InputErrorMessage>
             )}
 
             {errors?.email?.type === "validate" && (
-              <InputErrorMessage>
-                Por favor, insira um e-mail válido.
-              </InputErrorMessage>
+              <InputErrorMessage>Add a valid e-mail.</InputErrorMessage>
             )}
           </LoginInputContainer>
 
           <LoginInputContainer>
-            <p>Senha</p>
+            <p>Password</p>
             <CustomInput
               hasError={!!errors?.password}
-              placeholder="Digite sua senha"
+              placeholder="Type your password"
               type="password"
               {...register("password", { required: true })}
             />
 
             {errors?.password?.type === "required" && (
-              <InputErrorMessage>A senha é obrigatória.</InputErrorMessage>
+              <InputErrorMessage>The password is required.</InputErrorMessage>
             )}
           </LoginInputContainer>
 
           {errors?.password?.type === "mismatch" && (
-            <InputErrorMessage>A senha é inválida.</InputErrorMessage>
+            <InputErrorMessage>Invalid password.</InputErrorMessage>
           )}
 
           <CustomButton
             startIcon={<AiOutlineLogin size={18} />}
             onClick={() => handleSubmit(handleSubmitPress)()}
           >
-            Entrar
+            Login
           </CustomButton>
         </LoginContent>
       </LoginContainer>

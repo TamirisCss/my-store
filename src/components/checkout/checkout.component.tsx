@@ -27,14 +27,12 @@ const Checkout: FunctionComponent = () => {
             ))}
           </CheckoutProducts>
 
-          <CheckoutTotal>Total: R${productsTotalPrice}</CheckoutTotal>
+          <CheckoutTotal>Total: €{productsTotalPrice}</CheckoutTotal>
 
-          <CustomButton startIcon={<BsBagCheck />}>
-            Finalizar Compra
-          </CustomButton>
+          <CustomButton startIcon={<BsBagCheck />}>Purchase</CustomButton>
         </>
       ) : (
-        <p>Seu carrinho está vazio!</p>
+        <p>Your cart is empty!</p>
       )}
     </CheckoutContainer>
   );

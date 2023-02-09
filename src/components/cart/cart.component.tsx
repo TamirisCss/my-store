@@ -33,7 +33,7 @@ const Cart: FunctionComponent = () => {
     <CartContainer isVisible={isVisible}>
       <CartEscapeArea onClick={toggleCart} />
       <CartContent>
-        <CartTitle>Seu Carrinho</CartTitle>
+        <CartTitle>Your Cart</CartTitle>
 
         {/* produtos */}
         {products.map((product) => (
@@ -41,7 +41,7 @@ const Cart: FunctionComponent = () => {
         ))}
 
         {productsCount > 0 && (
-          <CartTotal>Total: R${productsTotalPrice}</CartTotal>
+          <CartTotal>Total: €{productsTotalPrice}</CartTotal>
         )}
 
         {productsCount > 0 && (
@@ -49,11 +49,11 @@ const Cart: FunctionComponent = () => {
             startIcon={<BsCartCheck />}
             onClick={handleGoToCheckoutClick}
           >
-            Ir para o Checkout
+            Go to Checkout
           </CustomButton>
         )}
 
-        {productsCount === 0 && <p>Seu carrinho está vazio!</p>}
+        {productsCount === 0 && <p>Your cart is empty!</p>}
       </CartContent>
     </CartContainer>
   );

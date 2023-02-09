@@ -30,7 +30,7 @@ const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
     <ProductContainer>
       <ProductImage imageUrl={product.imageUrl}>
         <CustomButton startIcon={<BsCartPlus />} onClick={handleAddToCartClick}>
-          Adicionar ao carrinho
+          Add to cart
         </CustomButton>
       </ProductImage>
 

@@ -21,7 +21,8 @@ export const CustomButtonContainer = styled.button`
 
   &:hover {
     cursor: pointer;
-    background-color: #000000;
+    background-color: ${Colors.background.white};
+    color: ${Colors.background.dark};
   }
 `;
 
