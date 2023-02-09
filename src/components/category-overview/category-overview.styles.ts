@@ -5,6 +5,10 @@ export const CategoryContainer = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 20px;
+
+  padding-bottom: 1.5rem;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 export const CategoryTitle = styled.p`
@@ -14,12 +18,16 @@ export const CategoryTitle = styled.p`
 `;
 
 export const ProductsContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  margin-top: 5px;
+  grid-gap: 20px;
+
   width: 100%;
-  justify-content: space-between;
-  flex-wrap: wrap;
 
   @media (max-width: 768px) {
-    grid-row-gap: 20px;
+    display: flex;
+    flex-direction: column;
   }
 `;

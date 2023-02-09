@@ -63,5 +63,6 @@ export const RemoveButton = styled.div`
 
   &:hover {
     cursor: pointer;
+    color: ${Colors.error};
   }
 `;
