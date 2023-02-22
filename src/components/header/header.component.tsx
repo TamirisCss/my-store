@@ -3,10 +3,10 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { GiAmpleDress } from "react-icons/gi";
 import { signOut } from "firebase/auth";
 import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 //Utils
 import { auth } from "../../config/firebase.config";
-import { UserContext } from "../../contexts/user.context";
 import { CartContext } from "../../contexts/cart.context";
 
 //Styles
@@ -20,8 +20,13 @@ import {
 const Header = () => {
   const navigate = useNavigate();
 
-  const { isAuthenticated } = useContext(UserContext);
   const { toggleCart, productsCount } = useContext(CartContext);
+
+  const dispatch = useDispatch();
+
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  );
 
   const handleLoginClick = () => {
     navigate("/login");
@@ -34,6 +39,11 @@ const Header = () => {
   };
   const handleExploreClick = () => {
     navigate("/explore");
+  };
+
+  const handleSignOutClick = () => {
+    dispatch({ type: "LOGOUT_USER" });
+    signOut(auth);
   };
 
   return (
@@ -52,7 +62,7 @@ const Header = () => {
         )}
 
         {isAuthenticated && (
-          <HeaderItem onClick={() => signOut(auth)}>Logout</HeaderItem>
+          <HeaderItem onClick={handleSignOutClick}>Logout</HeaderItem>
         )}
         <HeaderItem onClick={toggleCart}>
           <HiOutlineShoppingBag size={25} />

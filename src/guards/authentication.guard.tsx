@@ -1,8 +1,6 @@
-import { FunctionComponent, useContext, useEffect, ReactNode } from "react";
+import { FunctionComponent, useEffect, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-
-// Utilities
-import { UserContext } from "../contexts/user.context";
+import { useSelector } from "react-redux";
 
 // Components
 import Header from "../components/header/header.component";
@@ -13,7 +11,9 @@ interface children {
 }
 
 const AuthenticationGuard: FunctionComponent<children> = ({ children }) => {
-  const { isAuthenticated } = useContext(UserContext);
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  );
 
   const navigate = useNavigate();
 

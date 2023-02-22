@@ -1,25 +1,23 @@
+import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineLogin } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import validator from "validator";
-import { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
-import Loading from "../../components/loading/loading.component";
-
+//Utils
 import {
   AuthError,
   AuthErrorCodes,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-
-//Utils
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { auth, db, googleProvider } from "../../config/firebase.config";
-import { UserContext } from "../../contexts/user.context";
 
 // Components
+import Loading from "../../components/loading/loading.component";
 import Header from "../../components/header/header.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import CustomInput from "../../components/custom-input/custom-input.component";
@@ -49,7 +47,9 @@ const LoginPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isAuthenticated } = useContext(UserContext);
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  );
 
   const navigate = useNavigate();
 

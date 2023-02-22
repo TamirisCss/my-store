@@ -1,19 +1,21 @@
+import { useEffect, useState } from "react";
 import { AiOutlineLogin } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import validator from "validator";
 import { addDoc, collection } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
-import Loading from "../../components/loading/loading.component";
-
+//Utils
 import {
   AuthError,
   createUserWithEmailAndPassword,
   AuthErrorCodes,
 } from "firebase/auth";
+import { auth, db } from "../../config/firebase.config";
 
 // Components
+import Loading from "../../components/loading/loading.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import CustomInput from "../../components/custom-input/custom-input.component";
 import Header from "../../components/header/header.component";
@@ -26,10 +28,6 @@ import {
   SignUpHeadline,
   SignUpInputContainer,
 } from "./sign-up.styles";
-
-//Utils
-import { auth, db } from "../../config/firebase.config";
-import { UserContext } from "../../contexts/user.context";
 
 interface SignUpForm {
   firstName: string;
@@ -52,7 +50,9 @@ const SignUpPage = () => {
 
   const watchPassword = watch("password");
 
-  const { isAuthenticated } = useContext(UserContext);
+  const { isAuthenticated } = useSelector(
+    (rootReducer: any) => rootReducer.userReducer
+  );
 
   const navigate = useNavigate();
 
