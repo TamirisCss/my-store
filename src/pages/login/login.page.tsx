@@ -4,7 +4,6 @@ import { AiOutlineLogin } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import validator from "validator";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 //Utils
 import {
@@ -15,6 +14,7 @@ import {
 } from "firebase/auth";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { auth, db, googleProvider } from "../../config/firebase.config";
+import { useAppSelector } from "../../hooks/redux.hooks";
 
 // Components
 import Loading from "../../components/loading/loading.component";
@@ -47,8 +47,8 @@ const LoginPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer
   );
 
   const navigate = useNavigate();

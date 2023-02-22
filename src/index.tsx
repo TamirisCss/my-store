@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 
 import CategoryContextProvider from "./contexts/category.context";
-import UserContextProvider from "./contexts/user.context";
 import CartContextProvider from "./contexts/cart.context";
 
 const root = ReactDOM.createRoot(

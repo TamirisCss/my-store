@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import validator from "validator";
 import { addDoc, collection } from "firebase/firestore";
-import { useSelector } from "react-redux";
 
 //Utils
 import {
@@ -13,6 +12,7 @@ import {
   AuthErrorCodes,
 } from "firebase/auth";
 import { auth, db } from "../../config/firebase.config";
+import { useAppSelector } from "../../hooks/redux.hooks";
 
 // Components
 import Loading from "../../components/loading/loading.component";
@@ -50,8 +50,8 @@ const SignUpPage = () => {
 
   const watchPassword = watch("password");
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer
   );
 
   const navigate = useNavigate();

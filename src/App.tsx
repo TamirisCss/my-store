@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 //Pages
 import HomePage from "./pages/home/home.page";
@@ -13,7 +13,8 @@ import CheckoutPage from "./pages/checkout/checkout.page";
 // Utilities
 import { auth, db } from "./config/firebase.config";
 import { userConverter } from "./converters/firestore.converters";
-import { loginUser, logout } from "./store/reducers/users/user.actions";
+import { useAppSelector } from "./hooks/redux.hooks";
+import { loginUser, logoutUser } from "./store/reducers/users/user.actions";
 
 // Components
 import Loading from "./components/loading/loading.component";
@@ -27,8 +28,8 @@ const App: FunctionComponent = () => {
 
   const dispatch = useDispatch();
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer
   );
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const App: FunctionComponent = () => {
       const isSigningOut = isAuthenticated && !user;
 
       if (isSigningOut) {
-        dispatch(logout());
+        dispatch(logoutUser());
 
         return setIsInitializing(false);
       }
@@ -60,6 +61,7 @@ const App: FunctionComponent = () => {
 
       return setIsInitializing(false);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   if (isInitializing) return <Loading />;
