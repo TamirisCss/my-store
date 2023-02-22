@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../config/firebase.config";
 import { CartContext } from "../../contexts/cart.context";
 import { logoutUser } from "../../store/reducers/users/user.actions";
+import { toggleCart } from "../../store/reducers/cart/cart.actions";
 
 //Styles
 import {
@@ -21,7 +22,7 @@ import {
 const Header = () => {
   const navigate = useNavigate();
 
-  const { toggleCart, productsCount } = useContext(CartContext);
+  const { productsCount } = useContext(CartContext);
 
   const dispatch = useDispatch();
 
@@ -47,6 +48,10 @@ const Header = () => {
     signOut(auth);
   };
 
+  const handleCartClick = () => {
+    dispatch(toggleCart());
+  };
+
   return (
     <HeaderContainer>
       <HeaderTitle onClick={handleHomeClick}>
@@ -65,7 +70,7 @@ const Header = () => {
         {isAuthenticated && (
           <HeaderItem onClick={handleSignOutClick}>Logout</HeaderItem>
         )}
-        <HeaderItem onClick={toggleCart}>
+        <HeaderItem onClick={handleCartClick}>
           <HiOutlineShoppingBag size={25} />
           <p style={{ marginLeft: 5 }}>{productsCount}</p>
         </HeaderItem>
