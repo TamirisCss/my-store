@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import CategoryContextProvider from "./contexts/category.context";
+import "./index.css";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
+import CategoryContextProvider from "./contexts/category.context";
 import UserContextProvider from "./contexts/user.context";
 import CartContextProvider from "./contexts/cart.context";
 
@@ -13,13 +15,15 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <UserContextProvider>
-      <CategoryContextProvider>
-        <CartContextProvider>
-          <App />
-        </CartContextProvider>
-      </CategoryContextProvider>
-    </UserContextProvider>
+    <Provider store={store}>
+      <UserContextProvider>
+        <CategoryContextProvider>
+          <CartContextProvider>
+            <App />
+          </CartContextProvider>
+        </CategoryContextProvider>
+      </UserContextProvider>
+    </Provider>
   </React.StrictMode>
 );
 
