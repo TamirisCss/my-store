@@ -1,10 +1,15 @@
-import { FunctionComponent, useContext } from "react";
+import { FunctionComponent } from "react";
 import { BsBagCheck } from "react-icons/bs";
 
-import { CartContext } from "../../contexts/cart.context";
+// Components
 import CartItem from "../cart-item/cart-item.component";
 import CustomButton from "../custom-button/custom-button.component";
 
+// Utilities
+import { useAppSelector } from "../../hooks/redux.hooks";
+import { selectProductsTotalPrice } from "../../store/reducers/cart/cart.selectors";
+
+// Styles
 import {
   CheckoutContainer,
   CheckoutTitle,
@@ -13,7 +18,8 @@ import {
 } from "./checkout.styles";
 
 const Checkout: FunctionComponent = () => {
-  const { products, productsTotalPrice } = useContext(CartContext);
+  const { products } = useAppSelector((state) => state.cartReducer);
+  const productsTotalPrice = useAppSelector(selectProductsTotalPrice);
 
   return (
     <CheckoutContainer>
