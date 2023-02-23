@@ -2,14 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { GiAmpleDress } from "react-icons/gi";
 import { signOut } from "firebase/auth";
-import { useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 //Utils
 import { auth } from "../../config/firebase.config";
-import { CartContext } from "../../contexts/cart.context";
 import { logoutUser } from "../../store/reducers/users/user.actions";
 import { toggleCart } from "../../store/reducers/cart/cart.actions";
+import { useAppSelector } from "../../hooks/redux.hooks";
+import { selectProductsCount } from "../../store/reducers/cart/cart.selectors";
 
 //Styles
 import {
@@ -22,12 +22,12 @@ import {
 const Header = () => {
   const navigate = useNavigate();
 
-  const { productsCount } = useContext(CartContext);
+  const productsCount = useAppSelector(selectProductsCount);
 
   const dispatch = useDispatch();
 
-  const { isAuthenticated } = useSelector(
-    (rootReducer: any) => rootReducer.userReducer
+  const { isAuthenticated } = useAppSelector(
+    (rootReducer) => rootReducer.userReducer
   );
 
   const handleLoginClick = () => {
