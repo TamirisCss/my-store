@@ -87,4 +87,32 @@ describe("Cart", () => {
 
     getByText("1");
   });
+
+  it("should remove product on remove click", () => {
+    const { getByLabelText, queryByText, getByText } = renderWithRedux(
+      <Cart />,
+      {
+        preloadedState: {
+          cartReducer: {
+            products: [
+              {
+                id: "1",
+                imageUrl: "image_url",
+                name: "Hat",
+                price: 100,
+                quantity: 2,
+              },
+            ],
+          },
+        } as any,
+      }
+    );
+
+    const removeButton = getByLabelText(/remove hat/i);
+
+    userEvent.click(removeButton);
+
+    expect(queryByText(/hat/i)).toBeNull();
+    getByText(/Your cart is empty!/i);
+  });
 });
