@@ -55,7 +55,7 @@ const Cart: FunctionComponent = () => {
         ))}
 
         {productsCount > 0 && (
-          <CartTotal>Total: €{productsTotalPrice}</CartTotal>
+          <CartTotal>Total: R${productsTotalPrice}</CartTotal>
         )}
 
         {productsCount > 0 && (
