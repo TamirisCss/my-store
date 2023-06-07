@@ -16,4 +16,21 @@ describe("Sign Up", () => {
     getByText(/the password is required./i);
     getByText(/password confirmation is required/i);
   });
+
+  it("should show error when filling an invalid email", async () => {
+    const { getByText, findByText, getByPlaceholderText } = renderWithRedux(
+      <SignUpPage />,
+      {}
+    );
+
+    const emailInput = getByPlaceholderText(/type your e-mail/i);
+
+    userEvent.type(emailInput, "invalid_email");
+
+    const submitButton = getByText("Create account", { selector: "button" });
+
+    userEvent.click(submitButton);
+
+    await findByText(/add a valid e-mail./i);
+  });
 });
