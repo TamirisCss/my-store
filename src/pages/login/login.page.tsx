@@ -185,7 +185,7 @@ const LoginPage = () => {
             startIcon={<AiOutlineLogin size={18} />}
             onClick={() => handleSubmit(handleSubmitPress)()}
           >
-            Login
+            login
           </CustomButton>
         </LoginContent>
       </LoginContainer>
