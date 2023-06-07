@@ -110,7 +110,7 @@ const SignUpPage = () => {
             />
 
             {errors?.firstName?.type === "required" && (
-              <InputErrorMessage>Name is required.</InputErrorMessage>
+              <InputErrorMessage>first name is required.</InputErrorMessage>
             )}
           </SignUpInputContainer>
 
