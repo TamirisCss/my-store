@@ -33,7 +33,7 @@ const Checkout: FunctionComponent = () => {
             ))}
           </CheckoutProducts>
 
-          <CheckoutTotal>Total: €{productsTotalPrice}</CheckoutTotal>
+          <CheckoutTotal>Total: R${productsTotalPrice}</CheckoutTotal>
 
           <CustomButton startIcon={<BsBagCheck />}>Purchase</CustomButton>
         </>
