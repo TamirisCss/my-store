@@ -5,7 +5,6 @@ export const CategoryContainer = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 20px;
-
   padding-bottom: 1.5rem;
   padding-left: 20px;
   padding-right: 20px;
@@ -15,14 +14,17 @@ export const CategoryTitle = styled.p`
   font-size: 21px;
   font-weight: 500;
   margin-bottom: 5px;
+  align-self: center;
 `;
 
 export const ProductsContainer = styled.div`
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   margin-top: 5px;
   grid-gap: 20px;
+  max-width: 1285px;
 
   width: 100%;
 

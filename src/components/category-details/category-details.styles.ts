@@ -19,10 +19,12 @@ export const CategoryTitle = styled.div`
 `;
 
 export const ProductsContainer = styled.div`
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   grid-gap: 20px;
+  max-width: 1285px;
 
   margin-top: 5px;
 
